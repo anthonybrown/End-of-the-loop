@@ -17,12 +17,13 @@
   <nav role='navigation' id='menu' class='cf'>
     <h2>Main Nav</h2>
     <ul class='cf' id='main-nav'>
+      <li class='item0'><a href='#home'>home</a></li>
       <li class='item1'><a href='#forEach'>forEach</a></li>
       <li class='item2'><a href='#map'>map</a></li>
       <li class='item3'><a href='#filter'>filter</a></li>
       <li class='item4'><a href='#chaining'>chaining</a></li>
       <li class='item5'><a href='#concatAll'>concatAll</a></li>
-      <li class='item6'><a href='#obervable'>observables</a></li>
+      <li class='item6'><a href='#observables'>observables</a></li>
       <li class='item7'><a href='#map-with-observables'>map with obervables</a></li>
       <li class='item8'><a href='#dnd'>drag n drop</a></li>
       <li class='item9'><a href="#advanced">advanced flattening</a></li>
@@ -30,82 +31,161 @@
   </nav>
 	<header>
     <a href='#toTop'></a>
-    <div class='cf inner'>
+    <div id='home' class='cf inner'>
 			<h1>The End of the Loop</h1>
   </header>
   <section class='cf' id="main">
     <div class='inner'>
       <article id='main-article'>
-			<p>We can use JavaScript's built in functional design to tackle asynchronous events</p>
-			<div id='loop'>
-				<h2>The for loop</h2>
-				<p>The for loop</p>
-				<pre class='prettyprint code code1'></pre>
-				<div class='loop'>
+				<p>We can use JavaScript's built in functional design to tackle asynchronous events</p>
+				<div id='loop'>
+					<h2>The for loop</h2>
+					<p>The for loop</p>
+					<pre class='prettyprint code code1'></pre>
+					<div class='loop'>
+					</div>
 				</div>
-			</div>
 
-			<div class='container'>
-				<div id='forEach'>
-					<h2>the forEach method</h2>
+				<div class='container'>
+					<div id='forEach'>
+						<h2>the forEach method</h2>
+						<p>
+						forEach uses a closure and returns the symbol.
+						The forEach
+						</p>
+						<pre class='prettyprint code code2'></pre>
+					</div>
+					<div class='forEach'></div>
+				</div>
+
+				<div class='container'>
+					<div id='map'>
+					<h2>the map</h2>
 					<p>
-					forEach uses a closure and returns the symbol.
-					The forEach
+						We can use the Array's map method to make our code even shorter
+
+						The map method takes a "projection" and maps over the array.
+						You can make a transformation of every item in an array and
+						collect the results in a new array.
+
+						Not only will map work on static data like an Array, it will also deal with data
+						that arrives asynchronously.
 					</p>
-					<pre class='prettyprint code code2'></pre>
+					<pre class='prettyprint code code3'></pre>
+					<div class='map'></div>
 				</div>
-				<div class='forEach'></div>
 			</div>
 
 			<div class='container'>
-				<div id='map'>
-				<h2>the map</h2>
-				<p>
-					We can use the Array's map method to make our code even shorter
+				<div id='filter'>
+					<h2>Filter Method</h2>
+					<p>
+						Just like map, every Array has a filter method
+						on it's prototype.
 
-					The map method takes a "projection" and maps over the array.
-					You can make a transformation of every item in an array and
-					collect the results in a new array.
-
-					Not only will map work on static data like an Array, it will also deal with data
-					that arrives asynchronously.
-				</p>
-				<pre class='prettyprint code code3'></pre>
-				<div class='map'></div>
+						We can use filter to,...well filter through an array and have
+						some kind of conditional so we get back what we want.
+					</p>
+					<pre class='filter prettyprint code'></pre>
+					<p class='code4'></p>
+				</div>
 			</div>
-		</div>
 
-		<div class='container'>
-			<div id='filter'>
-				<h2>Filter Method</h2>
-				<p>
-					Just like map, every Array has a filter method
-					on it's prototype.
+			<div class='container'>
+				<div id='chaining'>
+					<h2>Chaining the map and filter methods</h2>
+					<p>
+					We can combine forEach, map and filter, to create some pretty complex
+					programs without having to use loops. Why are loops no good to us?
 
-					We can use filter to,...well filter through an array and have
-					some kind of conditional so we get back what we want.
-				</p>
-				<pre class='filter prettyprint code'></pre>
-				<p class='code4'></p>
+					Because they only work on static data. When programming asynchronously,
+					we want our programs to work regardless if the data is arriving synchronously
+					or asynchronously. That's why the forEach, map and reduce methods are
+					going to be the workhorse of our code.
+					</p>
+					<pre class='prettyprint code code5'></pre>
+					<p class='chain'></p>
+				</div>
 			</div>
-		</div>
 
-		<div class='container'>
-			<div id='chaining'>
-				<h2>Chaining the map and filter methods</h2>
-				<p>
-				We can combine forEach, map and filter, to create some pretty complex
-				programs without having to use loops. Why are loops no good to us?
+			<div class='container'>
+				<div id='concatAll'>
+					<h2>Working with nested data-structures</h2>
+					<p>
+						Working with array's are common, but working with nested
+						arrays is even more common.
+						Most data we work with will be nested data structures,
+						like arrays within arrays.
+					</p>
+					<p>
+						To get at the nested array, we can use forEach inside of another
+						forEach like so:
+					</p>
+					<pre class='prettyprint code code5'>
+	var exchanges = [
+	&nbsp;[
+	&nbsp;&nbsp;{ symbol: 'XFX', price: 240.22, volume: 23434 },
+	&nbsp;&nbsp;{ symbol: 'TNZ', price: 333.27, volume: 237   }
+	&nbsp;],
+	&nbsp;[
+	&nbsp;&nbsp;{ symbol: 'JXJ', price: 120.33, volume: 5342  },
+	&nbsp;&nbsp;{ symbol: 'NYN', price: 88.46 , volume: 98233 }
+	&nbsp;]
+	]
 
-				Because they only work on static data. When programming asynchronously,
-				we want our programs to work regardless if the data is arriving synchronously
-				or asynchronously. That's why the forEach, map and reduce methods are
-				going to be the workhorse of our code.
-				</p>
-				<pre class='prettyprint code code5'></pre>
-				<p class='chain'></p>
+	exchanges.forEach(function (exchange) {
+	&nbsp;&nbsp;exchange.forEach(function (stock) {
+	&nbsp;&nbsp;domTarget.innerHTML += JSON.stringify(stock)
+	&nbsp;})
+	})
+					</pre>
+					<p class='concat'></p>
+					<p>
+						So like before, we will create a concatAll method, like this:
+					</p>
+
+					<pre class='prettyprint code code5'>
+var exchanges = [
+&nbsp;[
+&nbsp;&nbsp;{ symbol: 'XFX', price: 240.22, volume: 23434 },
+&nbsp;&nbsp;{ symbol: 'TNZ', price: 333.27, volume: 237   }
+&nbsp;],
+&nbsp;[
+&nbsp;&nbsp;{ symbol: 'JXJ', price: 120.33, volume: 5342  },
+&nbsp;&nbsp;{ symbol: 'NYN', price: 88.46 , volume: 98233 }
+&nbsp;]
+]
+
+Array.prototype.concatAll = function () {
+&nbsp;&nbsp;var results = []
+
+&nbsp;&nbsp;this.forEach(function (subArray) {
+&nbsp;&nbsp;&nbsp;&nbsp;subArray.forEach(function (item) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;results.push(item)
+&nbsp;&nbsp;})
+&nbsp;})
+
+&nbsp;return results
+}
+
+var stocks = exchanges.concatAll()
+
+stocks.forEach(function (stock) {
+&nbsp;&nbsp;domTarget.innerHTML += JSON.stringify(stock)
+})
+					</pre>
+					<p class='concat2'></p>
+				</div>
 			</div>
-		</div>
+			<div class='container'>
+				<div id='observables'>
+					<h2>Working with observables.</h2>
+					<p>
+					</p>
+					<pre class='prettyprint code code6'></pre>
+					<p class='observables'></p>
+				</div>
+			</div>
 		</article>
 	</section>
 
@@ -122,7 +202,6 @@
     <script>
 			window.jQuery || document.write('<script src="../../js/libs/jquery.min.js"><\/script>')
 		</script>
-		<script
 		<script src='js/libs/underscore.js'></script>
 		<script src='js/libs/velocity.js'></script>
 		<script src='js/app.js'></script>

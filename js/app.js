@@ -13,29 +13,6 @@ $(document).ready(function() {
 });
 
 
-// create some elements and append them to the page
-
-  //var ul = document.createElement('ul');
-  //ul.id = 'result';
-  //var li = document.createElement('li');
-  //var second = document.createElement('li');
-  //second.className = 'results'
-  //var secondText = document.createElement('p');
-  //secondText.innerHTML = 'is declared but since there is no value assigned,<br> it\'s value is <b>undefined</b>';
-  //li.className = 'results';
-  //second.appendChild(secondText);
-  //var result = li;
-  //var p  = document.createElement('p');
-  //p.innerHTML += 'var message;';
-  //li.appendChild(p);
-  //var main = document.getElementById('main-article');
-  //var output = document.getElementsByTagName('p')[1];
-  //output.appendChild(ul);
-  //ul.appendChild(result);
-  //ul.appendChild(second);
-
-//}(jQuery, _));
-
 // set up the event handler
 $('a[href^="#"]').on('click', function(e) {
   var target = $( $(this).attr('href')  );
@@ -93,17 +70,23 @@ $(function() {
     // second
     setInterval(update, 1000);
 
-var loop = document.querySelector('.loop')
+var loop    = document.querySelector('.loop')
 var forEach = document.querySelector('.forEach')
-var map = document.querySelector('.map')
-var chain = document.querySelector('.chain')
-var filter = document.querySelector('.filter')
+var map     = document.querySelector('.map')
+var chain   = document.querySelector('.chain')
+var filter  = document.querySelector('.filter')
+var concat  = document.querySelector('.concat')
+var concat2 = document.querySelector('.concat2')
 
 var code1 = document.querySelector('.code1')
 var code2 = document.querySelector('.code2')
 var code3 = document.querySelector('.code3')
 var code4 = document.querySelector('.code4')
 var code5 = document.querySelector('.code5')
+var code6 = document.querySelector('.code6')
+var code7 = document.querySelector('.code7')
+var code8 = document.querySelector('.code8')
+var code9 = document.querySelector('.code9')
 
 
 //function getStockSymbols (stocks) {
@@ -306,3 +289,39 @@ filteredStockSymbols.forEach(function (symbol) {<br>\
 })<br>\
 </pre>'
 
+
+var exchanges = [
+	[
+		{ symbol: 'XFX', price: 240.22, volume: 23434 },
+		{ symbol: 'TNZ', price: 333.27, volume: 237   }
+	],
+	[
+		{ symbol: 'JXJ', price: 120.33, volume: 5342  },
+		{ symbol: 'NYN', price: 88.46 , volume: 98233 }
+	]
+]
+
+Array.prototype.concatAll = function () {
+	var results = []
+
+	this.forEach(function (subArray) {
+		subArray.forEach(function (item) {
+			results.push(item)
+		})
+	})
+
+	return results
+}
+
+var stocks = exchanges.concatAll()
+
+
+exchanges.forEach(function (exchange) {
+	exchange.forEach(function (stock) {
+		concat.innerHTML += JSON.stringify(stock)
+	})
+})
+
+stocks.forEach(function (stock) {
+	concat2.innerHTML += JSON.stringify(stock)
+})
