@@ -1,0 +1,611 @@
+
+  <section class='cf' id="main">
+    <div class='inner'>
+      <article id='main-article'>
+        <h1>Chapter 3</h1>
+        <h3 id='vars'>Varibales</h3>
+        <p>
+          In ECMAScript variables are loosely typed, meaining that a variable can hold any type
+          of data. Every variable is simply a named placeholder for a value. To define a variable,
+          use the <b>var</b> operator(note that <b>var</b> is a keyword) followed by the variable
+          name (an identifier, as described earlier), like this: <code class='white'>var message;</code>
+        </p>
+        <p>
+          This code defines a variable named <b>message</b> that can be used to hold any value.
+          (Without initialization, it holds a special value <b>undefined</b> which will be discussed
+          in the next section.) ECMAScript implements variable initialization, so it's possible to
+          define and set it's value at the same time, as in this example:<br>
+        </p>
+          <pre class='prettyprint code'>var message = "Hi!";</pre>
+        <p>
+          Here, <b>message</b> is defined to hold a string value of <em>"Hi!".</em>
+          Doing this initialization doesn't mark the variable as being a string type;
+          it's simply the assignment of a value to the variable. It is still possible
+          not only to change the value stored in the variable but also change it's data
+          type (which is possible but not incouraged) like this:
+        </p>
+
+        <pre class='prettyprint code'>var message = 'Hi!';<br> <b>message = 100;</b> // legal but not recommended.</pre>
+
+        <p>
+          It's important to not that using the <b>var</b> operator to define a variable makes it local
+          to the scope in which it was defined. For example, defining a variable inside a function using
+          <b>var</b> means that the variable is destroyed as soon as the function exits, as shown here:
+        </p>
+
+        <pre class='prettyprint code'>function test () {<br>&nbsp;&nbsp; var message = 'hi';<br>}</pre>
+        <pre class='prettyprint code'>test()<br>alert(message)// error, message is not accessible.</pre><br /><br />
+
+        <pre class='prettyprint code'>function test () {<br>&nbsp;&nbsp; message = 'hi';<br>}<br></pre>
+        <pre class='prettyprint code'>test()<br>alert(message)// hi, because message is now a global variable.</pre><br /><br />
+        <p>By removing the <code class='white'>var</code> from the function, message is now a global variable and is accessible outside the function.</p>
+
+        <h3 id='data'>Data Types</h3>
+        <p>
+          There are 5 simple data types(also called <em>primative types</em>) in ECMAScript:
+          <em>Undefined, Null, Boolean, Number</em> and <em> String</em>. There is also a
+          complex data type called <b>Object</b>, which is an unordered list of name-value pairs.
+          Because there is no way to define your own data types in ECMAScript, all values can be
+          represented as one of these 6 data types. Having only 6 data types may seem like too
+          few to fully represent data; however, ECMAScript's data types have <b>dynamic</b> aspects
+          that make each single data type behave like several.
+        </p>
+
+        <h3 id='typeof'>The typeof operator</h3>
+        <p>
+          Because ECMAScript is loosly typed, there needs to be a way to determine the data type of a
+          given variable. The <code class='white'>typeof</code> operator provides that information Using <b>typeof</b>
+          on a value returns on of the following strings:
+        </p>
+          <ul>
+            <li><code class='white'>"undefined"</code> if the value is undefined.</li>
+            <li><code class='white'>"boolean"</code> if the value is a Boolean.</li>
+            <li><code class='white'>"string"</code> if the value is a string.</li>
+            <li><code class='white'>"number"</code> if the value is a number</li>
+            <li><code class='white'>"object"</code> if the value is an object (other than a function) or null.</li>
+            <li><code class='white'>"function"</code> if the value is a function.</li>
+          </ul>
+        <p>
+          The <b>typeof</b> operator is called like this:
+        </p>
+          <script type="text/javascript" charset="utf-8">
+            var message = 'some string';
+            var myFunc  = function(name) { return 'Hello there, ' + name; };
+            console.log('typeof message: ' + typeof message);
+            console.log('typeof(message)' + typeof (message));
+            console.log('typeof 95' + typeof 95);
+            console.log('typeof myFunc' + typeof myFunc);
+          </script>
+<pre class='prettyprint code'>
+var message = 'some string';
+var myFunc = function (name){ return 'Hello there '+ name;  }
+console.log(typeof message); // 'string'
+console.log(typeof(message)); // 'string'
+console.log(typeof 95); // 'number'
+console.log(typeof myFunc); // 'function'
+</pre>
+        <p>
+          Note that because <b>typeof</b> is an operator and not a function,
+          no parentheses are required (although they can be used).
+        </p>
+        <p>
+          Be aware that the <b>typeof</b> operator can return confusing results.
+          Calling <b>typeof</b> null returns a value of "<b>object</b>" is returned.
+          Technically, functions are considered <em>Objects</em> in ECMAScript but
+          when <b>typeof</b> is called on a function, "<b>function</b>" is returned
+        </p>
+
+        <h3 id='undefined'>The Undefined Type</h3>
+        <p>The Undefined type has only one value, which is the special value <code class='white'>undefined</code></p>
+          <pre class="prettyprint code">var message;<br />console.log(message == undefined)</pre>
+        <script type="text/javascript" charset="utf-8">
+          var message = undefined;
+          console.log('message == undefined '+ (message == undefined));
+        </script>
+        <p>So declaring a variable but not setting it's value will give you an <code class="white">undefined</code>
+         value. Trying to access a variable that hasn't been defined will throw an error.</p>
+        <pre class='prettyprint code'>console.log(message);// undefined <br />console.log(age);// age is not defined</pre>
+        <script>console.log('this is console.log(age)'+ age);// age is not defined</script>
+        <p>The <code class="white">typeof</code> operator returns '<code class="white">undefined</code>'
+        when called on an uninitialized variable, but also returns <code class="white">"undefined"</code>
+        when called on an undeclared variable, which can be a bit confusing.</p>
+
+        <h3 id='null'>The Null Type</h3>
+        <p>The Null type is the second data type that has only one value:
+        the special value <code class="white">null</code>. Logically, a
+        <code class="white">null</code> value is an empty object pointer,
+        which is why <code class="white">typeof</code> returns <code class="white">
+        "object"</code> when it's passed a <code class="white">null</code> value
+        in the following example: </p>
+        <pre class='prettyprint code'>var car = null;
+console.log(typeof car);// "object"
+        </pre>
+        <script type="text/javascript" charset="utf-8">
+          var car = null;
+          console.log('console.log(typeof car) '+ typeof car);
+        </script>
+        <p>When defining a variable that is meant to later hold an object, it
+        is advisable to initialize the variable to <code class="white">null</code>
+         to determine if the variable has been filled with an object reference
+        at a later time, such as in this example: </p>
+        <pre class='prettyprint code'>if (car != null) {<br />&nbsp;&nbsp;// do something with car <br />}</pre>
+        <p>The value <code class="white">undefined</code> is a derivative of <code class="white">
+        null</code>, so ECMA-262 defines them to be superficially equal as follows:</p>
+        <p><code class='prettyprint code'>console.log(null == undefined)// true</code></p>
+        <p>Using the equality operator (==) between <b>null</b> and <b>undefined</b>
+        always return <b>true</b>, though keep in mind that this operator converts its
+        operands for comparison purposes</p>
+        <p>Even though <b>null</b> and <b>undefined</b> are related, they have
+        very different uses. As mentioned previously, you should never explicitly
+        set the value of a variable to <code class="white">undefined</code>,
+        but the same does not hold true for <code class="white">null</code>
+        Any time an object is expected but is not available, <b>null</b>
+        should be used in its place. This helps keep the paradigm of <code class="white">null</code>
+        as an empty object pointer and further differentiates it from <code class="white">undefined</code>.</p>
+
+        <h3 id='boolean'>The Boolean Type</h3>
+        <p>The Boolean type is one of the most frequently used types in ECMAScript and has only
+        two literal values: <b>true</b> and <b>false</b>. These values are distinct from numeric
+        values, so <b>true</b> is not equal to <b>1</b>, and <b>false</b> is not equal to
+        <b>0</b>. Assignment of Boolean values to variables is as follows: </p>
+        <p><code class='prettyprint code'>var found = true;<br />var lost = false;</code></p>
+        <p>Note that the Boolean literals <b>true</b> and <b>false</b> are case-sensitive,
+        so <b>True</b> and <b>False</b> (and other mixings of uppercase and lowercase) are
+        valid as identifiers but not as Boolean values.</p>
+        <p>Though there are just two literal Boolean values, all types of values have
+        Boolean equivalents in ECMAScript. To convert a value into its Boolean equivalent,
+        the specail <code class="white">Boolean()</code> casting function is called, like this: </p>
+        <p><code class='prettyprint code'>var message = 'Hello, JavaScript!';<br />var messageAsBoolean = Boolean(message);</code></p>
+        <p>In this example, the string <b>message</b> is converted into a Boolean value and stored
+        in <code class="white">messageAsBoolean</code>. The <code class="white">Boolean()</code>
+        casting function can be called on any type of data and will always return a Boolean value.
+        The rules for when a value is converted to <code class="white">true</code> or
+        <code class="white">false</code> depend on the data type as much as the actual value.</p>
+        <script type="text/javascript" charset="utf-8">
+          var message = 'Hello JavaScript!';
+          console.log('console.log(message) ' + message);
+          var messageAsBoolean = Boolean(message);
+          console.log('console.log(messageAsBoolean) ' + messageAsBoolean);
+        </script>
+        <p>These conversions are important to understand because flow-control
+        statements, such as the <code class="white">if</code> statement,
+        automatically perform this Boolean conversion, as shown here: </p>
+        <p><code class='prettyprint code'>var message = 'I love JavaScript';<br />if (message) { <br />&nbsp;
+          &nbsp; console.log('Value is true');<br />}</code></p>
+        <p>In this example, the console log will be displayed because the string
+        <code class="white">message</code> is automatically converted into its
+        Boolean equivalent (true). It's important to understand what variable you're
+        using in a flow-control statement because of this automatic conversion. Mistakenly
+        using an object instead of a Boolean can drastically alter the flow of your application.</p>
+
+        <h3 id="num">The Number Type</h3>
+        <p>
+          The Number type is perhaps the most interesting data type in ECMAScript, which uses the
+          IEEE-754 format to represent both integers and floating point values (also called double-
+          percision values in some languages). To support the various types of numbers, there are
+          several different number literal formats.
+        </p>
+        <p>
+          The most basic number literal format is that of a decimal integer, which can be entered directly
+          as shown here:
+        </p>
+        <p><code class='prettyprint code'>var intNum = 55; // integer</code></p>
+        <p>Integers can also be represented as either octal (base 8) or hexidecimal (base 16) literals.
+         For an octal literal, the first digit must be a zero(0) followed by a sequence of octal digits
+        (numbers 0 - 7). If a number is out of this range is detected in the literal, then the leading
+        zero is ignored and the number is treated as a decimal, as in the following examples: </p>
+        <p><code class='prettyprint code'>var octalNum1 = 070; // octal for 56 <br />var octalNum2 = 079; // invalid octal - interpreted as 79
+        <br />var octalNum3 = 08; // invalid octal = interpreted as 8</code></p>
+        <script>
+          var octalNum1 = 070;
+          console.log('var octalNum1 = 070 is octal '+ octalNum1);
+          var octalNum2 = 077;
+          console.log('var octalNum2 = 077 is octal ' + octalNum2);
+          var octalNum3 = 079;
+          console.log('var octalNum3 = 079 is not an octal number because the number is out of octal range '+ octalNum3);
+        </script>
+        <p>Octal literals are invalid when running in strict mode and will cause a syntax error.</p>
+        <p>
+          To create a hexadecimal literal, you must make the first 2 characters 0x(case sensitive)
+          followed by any number of hexadecimal digits (0 - 9, and A - F). Letters may be in upper or lower
+          case. Here's an example:
+        </p>
+        <p><code class='prettyprint code'>var hexNum1 = 0xA;// 10<br />var hexNum2 = 0x1f;// 31</code></p>
+        <script>
+          var hexNum1 = 0xA;
+          console.log('hexNum1 = 0xA is hexadecimal '+ hexNum1);
+          var hexNum2 = 0x1f;
+          console.log('hexNum1 = 0x1f is hexadecimal '+ hexNum2);
+        </script>
+        <p>
+        Numbers created using hexadecimal or octal format are treated
+        ad decimal numbers in all arithmetic operations.
+        </p>
+
+        <h4>Floating-Point Values</h4>
+        <p>
+          To define a floating-point value, you must include a decimal point and
+          at least one number after the decimal point. Although an integer is not
+          necessary before a decimal point, it is recommended. Here are some
+          examples:
+        </p>
+        <p>
+          <code class='prettyprint code'>var floatNum1 = 1.1;<br />var floatNum2 = 0.1;<br />var floatNum3 = .1;// valid but not recommended</code>
+        </p>
+        <p>
+          Because storing floating-point values uses twice as much memory as storing integer values,
+          ECMAScript always looks for ways to convert values into integers. When there is no digit
+          after the decimal point, the number becomes an integer. Likewise, if the number being
+          represented is a whole number (such as 1.0), it will be converted into an integer, as
+          in this example:
+        </p>
+        <code class='prettyprint code'>
+          var floatNum1 = 1.;// missing digit after the decimal - interperted as integer 1<br>
+          var floatNum2 = 10.0;// whole number - interpreted as integer 10
+        </code>
+        <p>
+          Floating point numbers are accurate up to 17 decimal places but are far less accurate in arithmetic
+          computations that whole numbers. For instance, adding 0.1 and 0.2 produces 0.30000000000000004, instead
+          of 0.3. These small rounding errors make it difficult to test for specific floating-point values.
+          Consider this example:
+        </p>
+<pre class="prettyprint code">
+  if (a + b == 0.3) { // avoid!
+    alert('You got 0.3');
+  }
+</pre>
+        <p>
+          Here the sum of two numbers is tested to see if it's equal to 0.3.
+          This will work for 0.05 and 0.25 and for 0.15 and 0.15. But if applied
+          to 0.1 and 0.2, as discussed previously, this test would fail.
+          Therefore you should never test for specific floating-point values.
+        </p>
+        <h4>Range of Values</h4>
+        <p>
+          The smallest number that can be represented in ECMAScript is stored in
+          <b>Number.MIN_VALUE</b> and is 5e-324 on most browsers; the largest number
+          is stored in <b>Number.MAX_VALUE</b> and is 1.7976931348623157e+308 on most
+          browsers. If a calculation results in a number that cannot be represented by
+          JavaScript's <strong>numberic range</strong>, the number automatically gets
+          the special value of <b>Infinity</b>. Any negative number that can't be
+          represented is <b>-Infinity</b>.
+        </p>
+        <p>
+          To determine if a value is finite(that is, it occurs between the minimum and the maximum),
+          there is the <b>isFinite()</b> function. This function returns <code class="white">true</code>
+          only if the argument is between the minimum or maximum values. as in this example:
+        </p>
+<pre class="prettyprint code">
+  var result = Number.MAX_VALUE + Number.MAX_VALUE;
+  console.log(isFinite(result)); // false
+</pre>
+      <h4>NaN</h4>
+      <p>
+        There is a special numeric value called <code class="white">NaN</code>, short for
+        <em>Not a Number</em>, which is used to indicate when an operation inteded to return
+        a number has failed (as opposed to throwing an error). For example, dividing any
+        number by 0 typically causes an error in other programming languages, halting code
+        execution. In ECMAScript, dividing a number by 0 returns <code class="white">NaN</code>
+        which allows other processing to continue.
+      </p>
+      <p>
+        The value <code class='white'>NaN</code> always returns <code class='white'>NaN</code>
+        <b>NaN</b> is not equal to anything, including itself!
+        <code class="prettyprint code">console.log(NaN == NaN);// false</code>
+      </p>
+      <p>
+        ECMAScript does provide a <code class="white">isNaN()</code> function. This function
+        accepts one argument and can be of any data type, to determine if the value is "not a number."
+        When a value is passed into <b>isNaN()</b> an attempt is made to convert it into a <code class="white">Number</code>
+        Some nonnumber values convert into numbers directly, like the string '10' or a Boolean value.
+        Any value that cannot be converted into a number causes the function to return <code class="white">true</code>
+        Consider the following:
+      </p>
+<pre class='prettyprint code'>
+console.log(isNaN(NaN));     // true
+console.log(isNaN(10));      // false->10 is a number
+console.log(isNaN('10'));    // false->can be converted
+console.log(isNaN('blue');   // false->cannot be converted
+console.log(isNaN(true));    // false->can be converted to 1.
+</pre>
+        <p>
+          <em>
+            Although typically not done, </em><b>isNaN()</b><em> can be applied
+            to objects. In that case, the object's</em> <b>valueOf()</b> <em>
+            method is first called to determine if the returned value can be converted into a
+            number. If not the  </em><b>toString()</b><em> method is called and its returned
+            value is tested as well. This is the general way that built-in functions and operators
+            work in ECMAScript
+          </em>
+        </p>
+
+        <h4>Number Conversions</h4>
+        <p>
+          There are three functions to convert nonnumneric values into numbers:
+        </p>
+<pre class="prettyprint code">
+Number() //    casting function
+parseInt()//   converts a string into an integer
+parseFloat()// converts a string into a floating-point value
+</pre>
+        <p>
+          The <code class="white">Number()</code> function can be used
+          on any data type. <code class="white">parseInt()</code> and
+          <code class="white">parseFloat()</code> are used to convert
+          strings to numbers. Each of these functions reacts differently
+          to the same input.
+        </p>
+        <p>
+          The <code class="white">Number()</code> function performs conversions
+          based on certain rules:
+        </p>
+        <ul>
+          <li>
+            When applied to Boolean values, <b>true</b> and <b>false</b> get
+            converted to 1 and 0, respectivly.
+          </li>
+          <li>When applied to numbers, the value is passed through and returned.</li>
+          <li>When applied to <b>null</b>, <code class="white">Number()</code> returns 0.</li>
+          <li>When applied to <b>undefined</b>, <code class="white">Number()</code> returns <b>NaN</b></li>
+          <li>
+            When applied to <b>strings</b> the following rules apply:
+            <ul>
+              <li>
+                If the string contains only numbers, optionally proceded by a + or - sign,
+                it is always converted to an integer, so "1" is 1 and "10" is 10 and so on.
+              </li>
+              <li>
+                If the string contains a valid floating-point number, than it's converted to
+                a floating-point value, <b>remember, leading zeros are ignored in each case.</b>
+              </li>
+              <li>
+                If the string contains a valid hexadecimal format, it is converted to the matching
+                number.
+              </li>
+              <li>
+                If the string is empty, it's converted to 0.
+              </li>
+              <li>
+                If the string contains anything other than the previous formats,
+                then it is converted to <code class="white">NaN</code>
+              </li>
+            </ul>
+          </li>
+          <li>
+            When applied to <b>Objects</b> the <code class="white">valueOf()</code>
+            method is called and the returned value is converted based on the previously
+            described rules. If that conversion results in <code class="white">NaN</code>
+            the <code class="white">toString()</code> method is called and the rules
+            for converting strings are applied.
+          </li>
+        </ul>
+        <p>
+          Because of the complexities of the <code class="white">Number()</code>
+          casting function when converting strings, the <code class="white">parseInt()</code>
+          function is usally used for integers.
+        </p>
+        <p>
+          The <code class="white">parseInt()</code> function looks at the string much more
+          closely than the <code class="white">Number()</code> function does. It looks for
+          numbers in the string and ends on the first nonnumeric pattern it finds. Leading
+          white-space is also ignored.<code class="white">parseInt()</code>
+          will always return <code class="white">NaN</code> If the first value isn't a number
+          or a + or - minus sign. Which is different than the <code class="white">Number() </code>
+          function which will return 0. Here are some examples:
+        </p>
+<pre class='prettyprint code'>
+var num1 = parseInt("123green")// 123
+var num2 = parseInt('')// NaN
+var num3 = parseInt('0xA', 16)// 10
+var num4 = parseInt('33.3')// 33
+var num5 = parseInt('77')// 77
+</pre>
+        <p>
+          It is recommended to use a radix with <code class="white">parseInt()</code> because of
+          the way browsers handle the different versions of ECMAScript 3 and ECMAScript 5. So to
+          avoid unexpected results it's always recommended to use a radix with the <b>parseInt() </b>
+          function like so:
+        </p>
+<pre class='prettyprint code'>
+var num1 = parseInt('0xAF', 16)// 175
+var num2 = parseInt('077', 8)// 63
+var num3 = parseInt('AD')// NaN
+var num4 = parseInt('AD', 16)// 173
+var num5 = parseInt('074', 10)// 74
+var num6 = parseInt('10', 2)// 2
+</pre>
+        <p>
+          So, always use the second parameter provided with <code class="white">parseInt()</code>
+          to avoid any unexpected results!
+        </p>
+
+        <p>
+          The <code class="white">parseFloat()</code> function is similar except that leading zero's
+          are ignored. <code class='white'>parseFloat()</code> will return a floating point value
+          but will ignore the second decimal it encounters and stop executing.
+        </p>
+<pre class="prettyprint code">
+var num1 = parseFloat('33.3')// 33.3
+var num2 = parseFloat('098.77')// 98.77
+var num3 = parseFloat('0xAD')// 0
+var num4 = parseFloat('0xA')// 0
+var num5 = parseFloat('22.33.77')// 22.33
+var num6 = parseFloat('3.125e7')// 3.1250000
+</pre>
+        <h3 id='string'>The String Type</h3>
+        <p>
+          The String data type represents a sequence of zero or more 16-bit Unicode characters.
+          Strings can use either single or double quotes, unlike in PHP, they mean the same
+          thing as long as you use one or the other.
+        </p>
+        <h4>Character Literals</h4>
+        <p>
+          The String data type provides us with several character literals to represent nonprintable
+          characters:
+        </p>
+<pre class='prettyprint code'>
+\n          New line
+\t          Tab
+\b          Backspace
+\r          Carriage return
+\f          Form feed
+\\          Backslash
+\'          Single quote
+\"          Double quote
+\xnn        A character represented by hexidecimal code <b>nn</b>
+\unnnn      A unicode character represented bt the hexadecimal code <b>nnn</b>
+</pre>
+        <p>
+          The character literals can be included anywhere in the string and will be
+           interpreted as if they where a single character, as shown here:
+        </p>
+<pre class='prettyprint code'>
+var text = 'This is the letter sigma: \u03a3'
+var output = document.getElementById('result');
+output.innerHTML += test;
+</pre>
+<p id='result'></p>
+<script>
+  var output = document.getElementById('result');
+  var text = 'This is the letter sigma: \u03a3.';
+  console.log(text);
+  result.innerHTML += text;
+</script>
+        <p>
+          The escape is character is 6 long but our entire <code class="white">text</code>
+          is 28 characters long. This is because the escaped set is counted as one character
+          instead of the 6 that makes it up. You can find the length of any string by using
+          the <code class="white">length</code> property.
+        </p>
+<pre class="prettyprint code">
+var text = 'This is the letter sigma: \u03a3.'
+console.log(text.length);
+</pre>
+<script>
+console.log('the length of the text is '+ text.length + ' characters long!');
+</script>
+        <h4>The Nature of Strings</h4>
+        <p>
+          Strings are immutable in ECMAScript, meaning that once they are created,
+          their values cannot change. To change the string held in a variable, the
+          original string must be destroyed and the variable filled with another
+          string containing a new value.
+        </p>
+<pre class='prettyprint code'>
+var lang = 'Java';// Java
+lang = lang + 'Script';// Java + Script
+console.log(lang);// JavaScript
+</pre>
+<script>
+  var lang = 'Java';
+  lang = lang + 'Script';
+  console.log('Java + Script = '+ lang);
+</script>
+        <h4>Converting to a String</h4>
+        <p>
+          There are two ways to convert a value into a string. The first is to use
+          the <code class="white">toString()</code> method that almost every value
+          has. This method's only job is to return the string equivalent of the value.
+          Consider this example.
+        </p>
+<pre class="prettyprint code">
+var age = 11;
+var ageToString = age.toString(); // the string "11"
+var found = true;
+var foundAsString = found.toString();// the string "true"
+</pre>
+<script>
+var age = 11;
+console.log('var age: '+ age );
+var ageToString = age.toString(); // the string "11"
+console.log('ageToString: '+ ageToString);
+var found = true;
+console.log(found);
+var foundAsString = found.toString();// the string "true"
+console.log('found as string: '+ foundAsString);
+</script>
+        <p>
+          The <code class="white">toString()</code> method is available on values that are
+          numbers, Booleans, objects, and strings. Yes, each string returns a copy of itself.
+          If a value is <b>null</b> or <b>undefined</b>, this method is not available.
+        </p>
+        <p>
+          In most cases, <code class="white">toString()</code> doesn't have any arguments.
+          However, when used with a number value, <code class="white">toString()</code>
+          accepts a single parameter: the radix in which to output the number. By default
+          <code class="white">toString()</code> always returns a string representation of
+          the value. By passing in a radix <b>toString()</b> can output the value in Binary,
+          Octal, Hexadecimal, or any other valid base, as in this example:
+        </p>
+<pre class='prettyprint code'>
+var num = 10;
+console.log(num.toSting());// "10"
+console.log(num.toString(2))// "1010"
+console.log(num.toString(8))// "12"
+console.log(num.toString(16))// "a"
+</pre>
+<script type="text/javascript" charset="utf-8">
+  var num = 10;
+  console.log('No radix: ' + num.toString());
+  console.log('Radix of 2: ' + num.toString(2)+ ' is the binary representation of 10');
+  console.log('Radix of 8: ' + num.toString(8) + ' is the octal representation of 10');
+  console.log('Radix of 10: '+ num.toString(10) + ' is the decimal representation of 10');
+  console.log('Radix of 16: '+ num.toString(16) + ' is the hexadecimal representation of 10');
+</script>
+        <h3 id='object'>The Object Type</h3>
+        <p>
+          Objects in ECMAScript start out as nonspecific groups of data and functionality.
+          Objects are creted by using the <code class="white">new</code> operator followed
+          by the name of the object type to create. Developers create their own objects by
+          creating instances of the <code class="white">Object</code> type and adding properties
+          and/or methods to it, as shown here:
+        </p>
+<pre class='prettyprint code'>
+var o = new Object();
+</pre>
+        <p>
+          This syntax is similar to Java, although ECMAScript requires parentheses to be used
+          only when providing arguments to the constructor. If there are no arguments, as in
+          the following example, then the parentheses can be omitted safely (though that's not recommended):
+        </p>
+<pre class='prettyprint code'>
+var o = new Object;// legal but not recommended.
+</pre>
+        <p>
+          Instances of <code class="white">Object</code> aren't very useful on their own, but
+          the concepts are important to understand, because, similar to <code class="white">
+            java.lang.Object</code> in Java, the <code class="white">Object</code> type in
+          ECMAScript is the base from which all other objects are derived. All of the properties
+          and methods of the <code class="white">Object</code> type are also present on other,
+          more specific objects.
+        </p>
+        <p>
+          Each <code class="white">Object</code> instance has the following properties and
+          methods:
+        </p>
+          <ul>
+            <li><code class="white">constructor</code> --- The function that was used to create
+            the object. In the previous example, the constructor is the <code class="white">Object()
+            </code> function.</li>
+            <li><code class="white">hasOwnProperty(<em>propertyName</em>)</code>--- Indicates if
+              the given property exists on the object instance(not on the prototype). The property
+              name must be specified as a string(for example, <code class="white">o.hasOwnProperty('name')</code>).
+            </li>
+            <li><code class="white">isPrototypeOf(object)</code> --- Determines if the object
+            is a prototype of another object.</li>
+            <li><code class="white">propertyIsEnumerable(propertyName)</code> --- Indicates if the
+            given property can be enumerated using the <code class="white">for-in</code> statement.
+            As with <code class="white">hasOwnProperty()</code>, the property name must be a string</li>
+            <li><code class="white">toLocaleString()</code> --- Returns a string representation of the
+            object that is appropriate for the locale of the execution environment.</li>
+            <li><code class="white">toString()</code> --- Returns a string representation of the object.</li>
+            <li><code class="white">valueOf()</code> --- Returns a string, number, or Boolean equivalent
+            of the object. It often returns the same value as <code class="white">toString()</code></li>
+          </ul>
+        <p>
+          Since <code class="white">Object</code> is the base for all objects in ECMAScript, every object
+          has these base properties and methods.
+        </p>
+      </article>
+    </div>
+  </section>

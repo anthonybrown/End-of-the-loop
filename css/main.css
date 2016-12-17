@@ -1,0 +1,351 @@
+/*=============================================================
+  CSS Animations
+  ============================================================*/
+/* CSS Animations */
+@-webkit-keyframes fadeout {
+  0%   { background: #fff; }
+  10%   { background: #eee; }
+  100% { background: #fff; }
+}
+@-moz-keyframes fadeout {
+  0%   { background: #fff; }
+  10%   { background: #eee; }
+  100% { background: #fff; }
+}
+@-o-keyframes fadeout {
+  0%   { background: #fff; }
+  10%   { background: #eee; }
+  100% { background: #fff; }
+}
+@keyframes fadeout {
+  0%   { background: #fff; }
+  10%   { background: #eee; }
+  100% { background: #fff; }
+}
+
+/*=============================================================
+  Global Styles
+  ============================================================*/
+
+html {
+  height: 100%;
+  min-height: 100%;
+  margin:0;
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+::selection {
+  background-color: hotpink;
+  color: #ddd;
+  text-shadow: none;
+}
+::moz-selection {
+  background-color: hotpink;
+  color: #ddd;
+  text-shadow: none;
+}
+
+
+.cf:before,
+.cf:after {
+  content: ' ';
+  display: table;
+}
+
+.cf:after {
+  clear: both;
+}
+
+/* IE 6/7 ONLY */
+
+.cf {
+  *zoom: 1;
+}
+
+body {
+	font-size: 62.5%;
+  height: 100%;
+  min-height: 100%;
+  font: 2rem/1.625 Helvetica, Arial, sans-serif;
+  color: #555;
+}
+
+/* FOR STICKY FOOTER */
+.inner {
+  width: 90%;
+  height: inherit;
+  margin: 0 auto;
+}
+
+.wrap {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto -100px;
+}
+
+/*code {
+  display: inline-block;
+  padding: 0.3em 1em;
+  background-color: #555;
+  color: #f9f9f9;
+  border-radius: 5px;
+}*/
+
+code.white {
+  display: inline-block;
+  padding: 0 0.5em;
+  background-color: #f1f1f1;
+  color: #777;
+}
+
+h6 {
+  text-transform: uppercase;
+}
+
+.code {
+ width: 100%;
+ display: inline-block;
+ font-size: 0.73em;
+ margin: 2em 0 1em 0;
+ padding: 1em;
+ border-radius: 5px;
+ text-align: left;
+ overflow-x: scroll;
+ white-space: pre-line;
+}
+
+/*=============================================================
+  Header Styles
+  ============================================================*/
+
+header {
+  width: 70%;
+  height: auto;
+  float: right;
+}
+  header  h1 {
+    margin: 0.3em 0 0;
+  }
+
+  header p {
+    font-size: 0.7em;
+    margin: 0;
+  }
+
+/*=============================================================
+  Main Navigation Styles
+  ============================================================*/
+  nav {
+    width: 300px;
+    height: 100%;
+    position: fixed;
+    margin: 0;
+    border-right: 1px solid #999;
+    background-color: #EEE;
+    text-align: center;
+    overflow: scroll;
+  }
+
+    nav ul {
+      list-style: none;
+    }
+      nav li {
+        width: 100%;
+        border-bottom: 1px solid #777;
+        border-top: 1px solid #fff;
+        margin: 0 1em 0 -0.5em;
+        padding: 0.3em 1em;
+      }
+      nav li:first-child {
+        border-top: none;
+      }
+      nav li:last-child {
+        border-bottom: none;
+      }
+        nav a {
+          text-decoration: none;
+          color: #777;
+        }
+          nav a:hover {
+            color: dodgerblue;
+          }
+          a.menu-link {
+            float: right;
+            display: none;
+            padding: 1em;
+          }
+
+        nav[role=navigation] {
+          clear: both;
+          -webkit-transition: all 0.3s ease-out;
+          -moz-transition: all 0.3s ease-out;
+          -ms-transition: all 0.3s ease-out;
+          -o-transition: all 0.3s ease-out;
+          transition: all 0.3s ease-out;
+        }
+
+
+/*=============================================================
+  Main Section Styles
+**============================================================*/
+
+section#main {
+  width: 70%;
+  float: right;
+}
+
+.container {
+  width: 80%;
+  float: left;
+  clear: both;
+  margin: 1em 0;
+}
+
+  .container > h1 {
+    margin: 0;
+    padding: 0;
+  }
+
+  .container > p {
+    margin-top: 0;
+    padding-top: 0;
+  }
+
+
+  li.results {
+    margin: 0;
+    padding: 0;
+    line-height:1.5;
+    list-style: none;
+    color: dodgerblue;
+  }
+
+footer {
+  width: 90%;
+  float: right;
+  text-align: center;
+  background-color: #777;
+  color: #fff;
+  line-height: 1;
+  font-size: 0.625em;
+}
+
+/*=============================================================
+  Button to top Styles
+  ============================================================*/
+
+  .go-top {
+    position: fixed;
+    bottom: 0.7em;
+    right: 3em;
+    text-decoration: none;
+    color: #fff;
+    background-color: rgba(0,0,0,0.3);
+    font-size: 14px;
+    padding: 2em;
+    display: none;
+    border-radius: 5px;
+  }
+  .go-top:hover {
+    color: #fff;
+    text-decoration: none;
+    background-color: rgba(0,0,0,0.7);
+  }
+
+/*=============================================================
+  Media Queries
+  ============================================================*/
+
+@media screen and (max-width: 39.97em) {
+
+header {
+  width: 100%;
+  height: auto;
+  float: right;
+}
+  header  h1 {
+    margin: 0.3em 0 0;
+  }
+  a.menu-link {
+    text-decoration: none;
+    color: #fff;
+    float: right;
+    display: block;
+    padding: 1em;
+    background-color: rgba(0,0,0,0.3);
+    width: 100%;
+  }
+
+    nav[role=navigation] {
+      clear: both;
+      -webkit-transition: all 0.3s ease-out;
+      -moz-transition: all 0.3s ease-out;
+      -ms-transition: all 0.3s ease-out;
+      -o-transition: all 0.3s ease-out;
+      transition: all 0.3s ease-out;
+    }
+
+  .js nav[role=navigation] {
+    max-width: none;
+    position: static;
+    width: auto;
+  }
+
+.js nav[role=navigation] {
+    overflow: hidden;
+    max-height: 0;
+  }
+
+  nav[role=navigation].active {
+    max-height: 67em;
+  }
+
+  nav[role=navigation] ul {
+    margin: 0;
+    padding: 0;
+    /*border-top: 1px solid #808080;*/
+  }
+
+  nav[role=navigation] li {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+
+  nav[role=navigation] li a {
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #eee;
+    display: block;
+    padding: 0.8em;
+    /*border-bottom: 1px solid #fff;
+    border-top: 1px solid #888;*/
+  }
+
+  section#main {
+    width: 100%;
+    float: right;
+  }
+
+  .container {
+    width: 100%;
+    float: left;
+    clear: both;
+    margin: 1em 0;
+  }
+
+  footer {
+    width: 100%;
+    font-size: .825em;
+  }
+    #datetime {
+      float: none;
+      margin-top: -10px;
+      margin-right: 1.75em;
+    }
+
+
+}
