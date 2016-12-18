@@ -23,7 +23,7 @@
       <li class='item4'><a href='#chaining'>chaining</a></li>
       <li class='item5'><a href='#concatAll'>concatAll</a></li>
       <li class='item6'><a href='#observables'>observables</a></li>
-      <li class='item7'><a href='#map-with-observables'>map with obervables</a></li>
+      <li class='item7'><a href='#map-with-observables'>map with observables</a></li>
       <li class='item8'><a href='#dnd'>drag n drop</a></li>
       <li class='item9'><a href="#advanced">advanced flattening</a></li>
     </ul>
@@ -257,6 +257,53 @@ try {
 					</pre>
 					<p class='observ2'></p>
 					<button id='button' type='button'>Click Me!</button>
+				</div>
+			</div>
+
+			<div class='container'>
+				<div id='map-with-observables'>
+					<h2>Working with map & observable.</h2>
+					<p>
+						Now we now how to create a DOM event into an Observable
+						and extract data from that Observable.
+						Let's take a look at how to use the map function and the
+						other functions.eee
+					</p>
+					<pre class='prettyprint code code8'>
+var Observable = Rx.Observable
+var button = document.getElementById('button')
+/*
+var handler = function (e) {
+&nbsp;&nbsp;console.log('clicked')
+&nbsp;&nbsp;observ.innerHTML += 'Clicked!'<br />
+&nbsp;&nbsp;button.removeEventListener('click', handler)
+}
+
+button.addEventListener('click', handler)
+*/
+var clicks = Observable.fromEvent(button, 'click')
+
+var points =
+&nbsp;&nbsp;clicks.map(function (e) {
+&nbsp;&nbsp;&nbsp;&nbsp;return { x: e.clientX, y: e.clientY }
+})
+
+var subscription =
+&nbsp;&nbsp;points.forEach(
+&nbsp;&nbsp;&nbsp;&nbsp;function onNext(point) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;console.log("I've been clicked!" + JSON.stringify(point))
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/*the same as removeEventListener()*/
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;subscription.dispose()
+},
+&nbsp;&nbsp;&nbsp;&nbsp;function onError (error) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;console.log("ERROR!")
+},
+&nbsp;&nbspp;&nbsp;&nbsp;function onCompleted() {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;console.log("Done")
+})
+					</pre>
+					<button id='button2' type='button'>Click Me!</button>
+					<p class='mapOb'></p>
 				</div>
 			</div>
 		</article>

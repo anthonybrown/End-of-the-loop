@@ -8,6 +8,8 @@ var concat  = document.querySelector('.concat')
 var concat2 = document.querySelector('.concat2')
 var observ  = document.querySelector('.observ')
 var observ2 = document.querySelector('.observ2')
+var mapOb   = document.querySelector('.mapOb')
+var mapObserv = document.querySelector('mapObserv')
 
 var code1 = document.querySelector('.code1')
 var code2 = document.querySelector('.code2')
@@ -374,3 +376,27 @@ var nums2 = ['four','five','six','seven','eight','nine']
 nums2.forEach(function (i) {
 	console.log(i)
 })
+
+var btn2 = document.getElementById('button2')
+/* WE DO THIS, WHEN IT'S ASYNCHRONOUS */
+var clicks = Observable.fromEvent(btn2, 'click')
+
+var points =
+	clicks.map(function(e) {
+		return { x: e.clientX, y: e.clientY }
+	})
+
+var subscription =
+	points.forEach(
+		function onNext (point) {
+			console.log('clicked: ' + JSON.stringify(point))
+			mapOb.innerHTML += 'clicked: ' +JSON.stringify(point)+ '<br>'
+			subscription.dispose()
+		},
+		function onError (error) {
+			console.log('ERROR!')
+		},
+		function onCompleted () {
+			console.log('done')
+			throw 'error'
+		})
