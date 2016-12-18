@@ -61,12 +61,12 @@ html {
 
 ::selection {
   background-color: hotpink;
-  color: #ddd;
+  color: #eaeaea;
   text-shadow: none;
 }
 ::moz-selection {
   background-color: hotpink;
-  color: #ddd;
+  color: #eaeaea;
   text-shadow: none;
 }
 
@@ -322,7 +322,8 @@ header {
   }
 
   nav[role=navigation].active {
-    max-height: 67em;
+  	height: auto;
+    max-height: 267em;
   }
 
   nav[role=navigation] ul {

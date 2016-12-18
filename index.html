@@ -4,13 +4,12 @@
   <meta name='description' content='JavaScript map, filter, reduce, forEach'>
   <meta name='Tony Brown' content='End of the Loop'>
   <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1' />
-  <meta name='viewport' content='width=device-width'>
+  <meta name='viewport'
+				content='width=device-width, maximum-scale=1.0, minimum-scale=1.0'>
   <link rel='stylesheet' href='css/tomorrow-night.css'>
   <link rel='stylesheet' href='css/normalize.css'>
   <link rel='stylesheet' href='css/main.css'>
   <script src='js/libs/modernizr.js'></script>
-  <script src='js/libs/prettify.js'></script>
-  <script src='js/libs/moment.js'></script>
 	</head>
 <body onload="prettyPrint()">
   <a class='menu-link'href='#menu'>Menu</a>
@@ -181,9 +180,83 @@ stocks.forEach(function (stock) {
 				<div id='observables'>
 					<h2>Working with observables.</h2>
 					<p>
+						We can work with a library called Rx.js so we can work
+						with these asynchronous data-sources.
+						How can we model an asynchronous operation as an array?,
+						we can't but there is a type we can use to model an asynchronous
+						operation as a collection. It's called an Observable.
+						The way we get the Observable method is from the
+						Reactive extensions library,
+						<strong><a href='http://reactivex.io/rxjs/'>RxJS</a></strong>
 					</p>
-					<pre class='prettyprint code code6'></pre>
-					<p class='observables'></p>
+					<p>
+						Let's have a button and listen for the "click" event.
+						We will add a remove event listener inside of the handler
+						so we stop listening for the event or we unsubscribe from
+						the "click" event.
+					</p>
+					<hr />
+					<pre class='prettyprint code code6'>
+/* USING OBSERVABLES with RX.JS */
+var Observable = Rx.Observable
+var button = document.getElementById('button')
+
+var handler = function (e) {
+&nbsp;&nbsp;console.log('clicked')
+&nbsp;&nbsp;observ.innerHTML += 'Clicked!'<br />
+&nbsp;&nbsp;button.removeEventListener('click', handler)
+}
+
+button.addEventListener('click', handler)
+					</pre>
+					<p class='observ'></p>
+					<p>
+						This is one way of thinking about events, interacting
+						with events through API's that hang off an object.
+						But Observable gives us a another and much more powerful
+						way of thinking about events. It gives us an Object to
+						represent that particular event stream,and using that Object
+						(Observable) we can use methods like map, filter and concatAll.
+						All we have to do is convert the event into a collection,
+						an Observable collection, by doing this:
+					</p>
+
+					<pre class='prettyprint code code7'>
+var Observable = Rx.Observable
+var button = document.getElementById('button')
+
+/* WE DO THIS, WHEN IT'S ASYNCHRONOUS */
+var clicks = Observable.fromEvent(button, 'click')
+
+&nbsp;&nbsp;var subscription =
+&nbsp;&nbsp;&nbsp;&nbsp;clicks.forEach(
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function onNext (e) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;console.log("I've been clicked!")
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/*the same as removeEventListener()*/
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;subscription.dispose()
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/*DOM Events don't have errors, so this will never run*/
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function onError (error) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;console.log('ERROR!')
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function onCompleted () {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;console.log('done')
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw 'error'
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;})
+
+
+/* WE DO THIS, WHEN IT'S SYNCHRONOUS */
+try {
+&nbsp;&nbsp;var nums = [1,2,3]
+&nbsp;&nbsp;nums.forEach(function (i) {
+&nbsp;&nbsp;&nbsp;&nbsp;console.log(i)
+&nbsp;&nbsp;})
+} catch (e) {
+&nbsp;&nbsp;console.log('ERROR!')
+}
+					</pre>
+					<p class='observ2'></p>
+					<button id='button' type='button'>Click Me!</button>
 				</div>
 			</div>
 		</article>
@@ -197,11 +270,14 @@ stocks.forEach(function (stock) {
       <a class='go-top' href="#">go up</a>
     </div>
 	</footer>
-	<!-- Latest compiled and minified JavaScript -->
+		<!-- Latest compiled and minified JavaScript -->
 		<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js'></script>
     <script>
 			window.jQuery || document.write('<script src="../../js/libs/jquery.min.js"><\/script>')
 		</script>
+		<script src='js/libs/prettify.js'></script>
+		<script src='js/libs/moment.js'></script>
+		<script src='js/libs/rx.all.js'></script>
 		<script src='js/libs/underscore.js'></script>
 		<script src='js/libs/velocity.js'></script>
 		<script src='js/app.js'></script>

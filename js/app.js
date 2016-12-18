@@ -1,3 +1,23 @@
+/* GETTING HANDLES TO DOM ELEMENTS */
+var loop    = document.querySelector('.loop')
+var forEach = document.querySelector('.forEach')
+var map     = document.querySelector('.map')
+var chain   = document.querySelector('.chain')
+var filter  = document.querySelector('.filter')
+var concat  = document.querySelector('.concat')
+var concat2 = document.querySelector('.concat2')
+var observ  = document.querySelector('.observ')
+var observ2 = document.querySelector('.observ2')
+
+var code1 = document.querySelector('.code1')
+var code2 = document.querySelector('.code2')
+var code3 = document.querySelector('.code3')
+var code4 = document.querySelector('.code4')
+var code5 = document.querySelector('.code5')
+var code6 = document.querySelector('.code6')
+var code7 = document.querySelector('.code7')
+var code8 = document.querySelector('.code8')
+var code9 = document.querySelector('.code9')
 // setup responsive menu
 
 $(document).ready(function() {
@@ -70,23 +90,6 @@ $(function() {
     // second
     setInterval(update, 1000);
 
-var loop    = document.querySelector('.loop')
-var forEach = document.querySelector('.forEach')
-var map     = document.querySelector('.map')
-var chain   = document.querySelector('.chain')
-var filter  = document.querySelector('.filter')
-var concat  = document.querySelector('.concat')
-var concat2 = document.querySelector('.concat2')
-
-var code1 = document.querySelector('.code1')
-var code2 = document.querySelector('.code2')
-var code3 = document.querySelector('.code3')
-var code4 = document.querySelector('.code4')
-var code5 = document.querySelector('.code5')
-var code6 = document.querySelector('.code6')
-var code7 = document.querySelector('.code7')
-var code8 = document.querySelector('.code8')
-var code9 = document.querySelector('.code9')
 
 
 //function getStockSymbols (stocks) {
@@ -301,6 +304,12 @@ var exchanges = [
 	]
 ]
 
+exchanges.forEach(function (exchange) {
+	exchange.forEach(function (stock) {
+		concat.innerHTML += JSON.stringify(stock)
+	})
+})
+
 Array.prototype.concatAll = function () {
 	var results = []
 
@@ -315,13 +324,53 @@ Array.prototype.concatAll = function () {
 
 var stocks = exchanges.concatAll()
 
-
-exchanges.forEach(function (exchange) {
-	exchange.forEach(function (stock) {
-		concat.innerHTML += JSON.stringify(stock)
-	})
-})
-
 stocks.forEach(function (stock) {
 	concat2.innerHTML += JSON.stringify(stock)
+})
+
+/* USING OBSERVABLES with RX.JS */
+var Observable = Rx.Observable
+var button = document.getElementById('button')
+
+/*var handler = function (e) {
+	console.log('clicked')
+	observ.innerHTML += 'Clicked!<br />'
+	button.removeEventListener('click', handler)
+}
+
+button.addEventListener('click', handler)
+*/
+
+/* WE DO THIS, WHEN IT'S ASYNCHRONOUS */
+var clicks = Observable.fromEvent(button, 'click')
+
+var subscription =
+	clicks.forEach(
+		function onNext (e) {
+			console.log("I've been clicked!");
+			observ2.innerHTML += 'clicked!<br />'
+			subscription.dispose()
+		},
+		function onError (error) {
+			console.log('ERROR!')
+		},
+		function onCompleted () {
+			console.log('done')
+			throw 'error'
+		})
+
+
+/* WE DO THIS, WHEN IT'S SYNCHRONOUS */
+try {
+	var nums = [1,2,3]
+	nums.forEach(function (i) {
+		console.log(i)
+	})
+} catch (e) {
+	console.log('ERROR!')
+}
+
+var nums2 = ['four','five','six','seven','eight','nine']
+nums2.forEach(function (i) {
+	console.log(i)
 })
