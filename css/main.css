@@ -413,3 +413,16 @@ header {
 			color: firebrick;
 		}
 
+#parent {
+	width: 400px;
+	height: 200px;
+	background-color: rgb(255, 53, 69);
+}
+	#widget {
+		position: absolute;
+		width: 150px;
+		background-color: rgb(100, 154, 255);
+		color: #fff;
+		text-align: center;
+		padding: 0 0.5em;
+	}
