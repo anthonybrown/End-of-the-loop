@@ -174,6 +174,67 @@ stocks.forEach(function (stock) {
 })
 					</pre>
 					<p class='concat2'></p>
+					<p>
+						Here is another example:
+					</p>
+					<pre class='prettyprint code'>
+var names =
+&nbsp;&nbsp;exchanges
+&nbsp;&nbsp;&nbsp;&nbsp;.map(function(name) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return name
+&nbsp;&nbsp;})
+
+names.forEach(function (stocks) {
+&nbsp;&nbsp;console.log(name)
+&nbsp;&nbsp;concat3.innerHTML += stocks.name + '<br>'
+})
+
+var exchanges = [
+&nbsp;{
+&nbsp;&nbsp;name: 'NYSE',
+&nbsp;&nbsp;stocks: [
+&nbsp;&nbsp;&nbsp;&nbsp;{ symbol: "APPL", price: 115.97, vol: 34000000 },
+&nbsp;&nbsp;&nbsp;&nbsp;{ symbol: "JPM" , price: 84.89 , vol: 23008520 },
+&nbsp;&nbsp;&nbsp;&nbsp;{ symbol: "ORCL", price: 39.10 , vol: 46224181 }
+&nbsp;&nbsp;]
+&nbsp;},
+&nbsp;{
+&nbsp;&nbsp;name: 'NIKKEI',
+&nbsp;&nbsp;stocks: [
+&nbsp;&nbsp;&nbsp;&nbsp;{ symbol: "TMC", price: 60.91, vol: 6668400 },
+&nbsp;&nbsp;&nbsp;&nbsp;{ symbol: "SNE", price: 35.85, vol: 2974900 },
+&nbsp;&nbsp;&nbsp;&nbsp;{ symbol: "HMC", price: 30.12, vol: 3654600 }
+&nbsp;&nbsp;]
+&nbsp;},
+&nbsp;{
+&nbsp;&nbsp;name: 'HSI',
+&nbsp;&nbsp;stocks: [
+&nbsp;&nbsp;&nbsp;&nbsp;{ symbol: "PTR", price: 76.15, vol: 104859834 },
+&nbsp;&nbsp;&nbsp;&nbsp;{ symbol: "HKG", price: 13.80, vol: 8154051   },
+&nbsp;&nbsp;&nbsp;&nbsp;{ symbol: "LFC", price: 20.15, vol: 47439861 }
+&nbsp;&nbsp;]
+&nbsp;}
+]
+
+var stocks =
+&nbsp;exchanges
+&nbsp;&nbsp;.map(function(exchange) {
+&nbsp;&nbsp;&nbsp;&nbsp;return exchange.stocks
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.filter(function (stock) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return stock.price >= 50.00
+&nbsp;&nbsp;&nbsp;&nbsp;})
+&nbsp;&nbsp;})
+&nbsp;&nbsp;.concatAll()
+
+stocks.forEach(function(stock) {
+&nbsp;&nbsp;console.log(JSON.stringify(stock))
+})
+					</pre>
+					<p>
+						Here we are filtering through to get the stocks that are
+						over $50.00
+					</p>
+					<p class='concat3'></p>
 				</div>
 			</div>
 			<div class='container'>

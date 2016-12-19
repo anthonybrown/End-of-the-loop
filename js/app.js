@@ -6,6 +6,7 @@ var chain   = document.querySelector('.chain')
 var filter  = document.querySelector('.filter')
 var concat  = document.querySelector('.concat')
 var concat2 = document.querySelector('.concat2')
+var concat3 = document.querySelector('.concat3')
 var observ  = document.querySelector('.observ')
 var observ2 = document.querySelector('.observ2')
 var mapOb   = document.querySelector('.mapOb')
@@ -288,7 +289,7 @@ var filteredStockSymbols =<br>\
     })<br>\
     .map(function (stock) {<br>\
       return stock.symbol<br>\
-		})<br><br>\
+    })<br><br>\
 filteredStockSymbols.forEach(function (symbol) {<br>\
   chain.innerHTML += "Stocks over $30: " + symbol<br>\
 })<br>\
@@ -329,6 +330,7 @@ var stocks = exchanges.concatAll()
 stocks.forEach(function (stock) {
 	concat2.innerHTML += JSON.stringify(stock)
 })
+
 
 /* USING OBSERVABLES with RX.JS */
 var Observable = Rx.Observable
@@ -400,3 +402,58 @@ var subscription =
 			console.log('done')
 			throw 'error'
 		})
+
+var exchanges = [
+	{
+		name: 'NYSE',
+		stocks: [
+			{ symbol: "APPL", price: 115.97, vol: 34000000 },
+			{ symbol: "JPM" , price: 84.89 , vol: 23008520 },
+			{ symbol: "ORCL", price: 39.10 , vol: 46224181 }
+		]
+	},
+	{
+		name: 'NIKKEI',
+		stocks: [
+			{ symbol: "TMC", price: 60.91, vol: 6668400 },
+			{ symbol: "SNE", price: 35.85, vol: 2974900 },
+			{ symbol: "HMC", price: 30.12, vol: 3654600 }
+		]
+	},
+	{
+		name: 'HSI',
+		stocks: [
+			{ symbol: "PTR", price: 76.15, vol: 104859834 },
+			{ symbol: "HKG", price: 13.80, vol: 8154051   },
+			{ symbol: "LFC", price: 20.15, vol: 47439861 }
+		]
+	}
+]
+
+var names =
+	exchanges
+	.map(function(name) {
+		return name
+	})
+
+names.forEach(function (stocks) {
+	console.log(name)
+	concat3.innerHTML += 'Stock exchange: ' + stocks.name + '<br>'
+})
+
+var stocks =
+	exchanges
+		.map(function(exchange) {
+			return exchange.stocks
+				.filter(function (stock) {
+					return stock.price >= 50.00
+				})
+		})
+		.concatAll()
+
+stocks.forEach(function(stock) {
+	console.log(JSON.stringify(stock))
+	concat3.innerHTML += '<br>' + JSON.stringify(stock)
+})
+
+
