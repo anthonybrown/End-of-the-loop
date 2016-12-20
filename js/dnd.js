@@ -16,7 +16,18 @@ var drags =
 		})
 		.concatAll()
 
+	drags.forEach(function (e) {
+		widget.style.left  = e.clientX + 'px'
+		widget.style.top	 = e.clientY + 'px'
+	},
+		function onError(error) {
+		},
+		function onCompleted() {
+		})
+		.concatAll()
+
 drags.forEach(function (e) {
-	widget.style.left  = e.clientX + 'px'
-	widget.style.top	 = e.clientY + 'px'
+	widget.style.left  = e.clientX += 'px'
+	widget.style.top	 = e.clientY += 'px'
+				.takeUntil(parentMouseUps)
 })

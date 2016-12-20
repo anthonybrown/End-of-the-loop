@@ -1,15 +1,15 @@
 /* GETTING HANDLES TO DOM ELEMENTS */
-var loop    = document.querySelector('.loop')
-var forEach = document.querySelector('.forEach')
-var map     = document.querySelector('.map')
-var chain   = document.querySelector('.chain')
-var filter  = document.querySelector('.filter')
-var concat  = document.querySelector('.concat')
-var concat2 = document.querySelector('.concat2')
-var concat3 = document.querySelector('.concat3')
-var observ  = document.querySelector('.observ')
-var observ2 = document.querySelector('.observ2')
-var mapOb   = document.querySelector('.mapOb')
+var loop      = document.querySelector('.loop')
+var forEach   = document.querySelector('.forEach')
+var map       = document.querySelector('.map')
+var chain     = document.querySelector('.chain')
+var filter    = document.querySelector('.filter')
+var concat    = document.querySelector('.concat')
+var concat2   = document.querySelector('.concat2')
+var concat3   = document.querySelector('.concat3')
+var observ    = document.querySelector('.observ')
+var observ2   = document.querySelector('.observ2')
+var mapOb     = document.querySelector('.mapOb')
 var mapObserv = document.querySelector('mapObserv')
 
 var code1 = document.querySelector('.code1')
@@ -72,7 +72,7 @@ $(function() {
 
   // MomentJS date and time function
   var datetime = null,
-        date = null;
+			date		 = null;
 
   // this is the function that updates the time
   var update = function () {
@@ -81,7 +81,7 @@ $(function() {
     // set the datetime variable with jQuery's html to update the DOM with
     // our new formatted date
     datetime.html(date.format('dddd, MMMM Do YYYY, h:mm:ss a'));
-  };
+  }
 
     // add the formatted date to the page
     // using jQuery to target a DOM element
@@ -476,5 +476,4 @@ drags.forEach(function (e) {
 	widget.style.left  = e.clientX + 'px'
 	widget.style.top	 = e.clientY + 'px'
 })
-
 
